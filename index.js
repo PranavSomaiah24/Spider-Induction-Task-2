@@ -1,4 +1,4 @@
-let currentQuestion, noAnswered, score, playerName;
+let currentQuestion, noAnswered, playerScore, playerName, elapsedTime;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
 let scores = ["1", "2", "3"];
@@ -11,11 +11,11 @@ for (let e of scores) {
     localStorage.setItem("name" + e, "Bob");
   }
 }
-console.log(localStorage.getItem("1"));
+
 function startQuiz() {
   currentQuestion = 0;
   noAnswered = 0;
-  score = 0;
+  playerScore = 0;
   questionList = JSON.parse(JSON.stringify(questions));
   showQuestion(questionList[currentQuestion]);
 }
@@ -71,7 +71,7 @@ function checkOption() {
       overlayDisplay("green", "CORRECT");
       this.style.backgroundColor = "green";
       this.style.color = "white";
-      score++;
+      playerScore++;
     } else {
       overlayDisplay("red", "WRONG");
       this.style.backgroundColor = "red";
@@ -81,11 +81,12 @@ function checkOption() {
 }
 
 function scoreDisplay() {
+  score = playerScore * 10 - Math.floor((20 - elapsedTime) / 10) * 2;
   checkHighScore();
   htableDisplay();
   document.getElementById("hTable").style.display = "block";
   result = document.getElementById("scoreDisplay");
-  result.innerHTML = playerName + " Scored " + score + " out of 5";
+  result.innerHTML = playerName + " Scored " + score + " out of 50";
   result.classList.add("fadeIn");
   result.style.display = "block";
   restartBtn.style.display = "block";
@@ -140,7 +141,19 @@ function htableDisplay() {
     i++;
   }
 }
-
+function startTimer(duration) {
+  timer = duration;
+  let seconds;
+  document.getElementById("timer").style.display = "block";
+  setInterval(function () {
+    seconds = parseInt(timer % 60, 10);
+    elapsedTime = seconds;
+    document.getElementById("timer").innerHTML = seconds;
+    if (--timer < 0) {
+      timer = 0;
+    }
+  }, 1000);
+}
 let questionList,
   questions = [
     {
@@ -258,6 +271,7 @@ nextBtn.addEventListener("click", () => {
     showQuestion(questionList[currentQuestion]);
   }
   if (noAnswered == questionList.length) {
+    clearInterval(interval);
     clearOptions();
     document.getElementById("control-btns").style.display = "none";
     scoreDisplay();
@@ -275,6 +289,7 @@ strtBtn.addEventListener("click", () => {
   strtBtn.style.display = "none";
   playerName = document.getElementById("name").value;
   document.getElementById("name").style.display = "none";
+  startTimer(20);
   startQuiz();
 });
 
@@ -284,5 +299,6 @@ restartBtn.addEventListener("click", () => {
   document.getElementById("scoreDisplay").style.display = "none";
   document.getElementById("hTable").style.display = "none";
   clearOptions();
+  startTimer(20);
   startQuiz();
 });

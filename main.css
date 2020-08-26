@@ -25,6 +25,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-size: 2rem;
 }
 .quiz-space {
@@ -79,6 +80,13 @@ h1 {
   font-size: 1.5rem;
   padding: 0 0.5em;
   margin: 0 0.7em;
+}
+#timer {
+  display: none;
+  position: absolute;
+  top: 8%;
+  color: white;
+  font-size: 2.5rem;
 }
 #restart-btn {
   display: none;
