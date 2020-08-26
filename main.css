@@ -109,3 +109,7 @@ body {
     opacity: 0;
   }
 }
+
+body {
+  margin: 1;
+}
