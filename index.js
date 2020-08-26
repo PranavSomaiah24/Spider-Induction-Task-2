@@ -1,4 +1,4 @@
-let currentQuestion, noAnswered, score;
+let currentQuestion, noAnswered, score, name;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
 
@@ -73,7 +73,7 @@ function checkOption() {
 
 function scoreDisplay() {
   result = document.getElementById("scoreDisplay");
-  result.innerHTML = "Your Scored " + score + " out of 5";
+  result.innerHTML = name + " Scored " + score + " out of 5";
   result.classList.add("fadeIn");
   result.style.display = "block";
   restartBtn.style.display = "block";
@@ -216,6 +216,7 @@ nextBtn.addEventListener("click", () => {
   }
   if (noAnswered == questionList.length) {
     clearOptions();
+    document.getElementById("control-btns").style.display = "none";
     scoreDisplay();
   }
 });
@@ -229,11 +230,14 @@ prevBtn.addEventListener("click", () => {
 
 strtBtn.addEventListener("click", () => {
   strtBtn.style.display = "none";
+  name = document.getElementById("name").value;
+  document.getElementById("name").style.display = "none";
   startQuiz();
 });
 
 restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
+  document.getElementById("control-btns").style.display = "block";
   document.getElementById("scoreDisplay").style.display = "none";
   clearOptions();
   startQuiz();

@@ -12,6 +12,12 @@ body {
   padding: 0 0 0.5em 1em;
   font-weight: bold;
 }
+a{
+  color: white;
+}
+h1{
+  margin: 0.2em 0 0.5em 0;
+}
 .game-container {
   background: indigo;
   height: 100vh;
@@ -86,7 +92,18 @@ body {
   font-size: 4rem;
   z-index: 10;
 }
-
+#name {
+  margin-bottom: 2em;
+  padding: 1em;
+  font-size: 1.5rem;
+  text-align: center;
+  auto
+}
+#strt-btn {
+  font-size: 1.5rem;
+  padding: 1em;
+  border-radius: 0.5em;
+}
 .fadeIn {
   animation: fadeIn 2s infinite;
 }
@@ -108,8 +125,4 @@ body {
   to {
     opacity: 0;
   }
-}
-
-body {
-  margin: 1;
 }
