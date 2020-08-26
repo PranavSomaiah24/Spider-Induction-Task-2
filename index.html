@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="top">
+      <div class="heading">
+        <header>
+          <a href="#">reaction.test</a>
+        </header>
+        <h1>Test Your Reaction Speed</h1>
+        <p>A chance for you to prove your superior reaction speed.</p>
+        <p id="rule">Click the numbers in order as fast as you can!</p>
+      </div>
+    </div>
+    <div class="game-container">
+      <div class="quiz-space">
+        <button id="strt-btn">START QUIZ</button>
+        <div id="question"></div>
+        <div id="scoreDisplay"></div>
+        <button id="restart-btn">RESTART</button>
+        <div class="option" id="option-btns">
+          <button class="option-btn"></button
+          ><button class="option-btn"></button
+          ><button class="option-btn"></button
+          ><button class="option-btn"></button>
+        </div>
+        <div class="control-btns" id="control-btns">
+          <button class="control-btn" id="prev-btn">Prev</button>
+          <button class="control-btn" id="next-btn">Next</button>
+        </div>
+      </div>
+      <div id="overlay"></div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.top {
+  background: linear-gradient(blue, indigo 80%);
+  color: white;
+  text-align: left;
+  padding: 0 0 0.5em 1em;
+  font-weight: bold;
+}
+.game-container {
+  background: indigo;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+.quiz-space {
+  background: blanchedalmond;
+  width: 70%;
+  height: 50%;
+  max-height: 50%;
+  max-width: 70%;
+  padding: 1em 1em 0 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+}
+#scoreDisplay {
+  display: none;
+  margin: 0.5em 0 0 0;
+}
+#question {
+  margin-right: auto;
+}
+.option {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 2em;
+  font-size: rem;
+  margin: auto 0;
+}
+.option-btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  border-radius: 0.5em;
+  outline: none;
+  padding: 0.5em;
+  cursor: pointer;
+}
+.option-btn:hover {
+  background: rgba(201, 211, 199, 0.5);
+  box-shadow: 0 0 50px rgba(23, 255, 34, 0.7);
+}
+.control-btns {
+  padding: 0 1em;
+  margin: auto 0 1em 0;
+}
+.control-btn {
+  font-size: 1.5rem;
+  padding: 0 0.5em;
+  margin: 0 0.7em;
+}
+#restart-btn {
+  display: none;
+  font-size: 1.5rem;
+  padding: 0.5em;
+  margin: 3em 0 0 0;
+}
+#overlay {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 50%;
+  color: white;
+  font-size: 4rem;
+  z-index: 10;
+}
+
+.fadeIn {
+  animation: fadeIn 2s infinite;
+}
+.fadeOut {
+  animation: fadeOut 1s forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
