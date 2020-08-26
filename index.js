@@ -1,13 +1,22 @@
-let currentQuestion, noAnswered, score, name;
+let currentQuestion, noAnswered, score, playerName;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
+let scores = ["1", "2", "3"];
 
+for (let e of scores) {
+  if (localStorage.getItem(e) == null) {
+    localStorage.setItem(e, "0.000");
+  }
+  if (localStorage.getItem("name" + e) == null) {
+    localStorage.setItem("name" + e, "Bob");
+  }
+}
+console.log(localStorage.getItem("1"));
 function startQuiz() {
   currentQuestion = 0;
   noAnswered = 0;
   score = 0;
   questionList = JSON.parse(JSON.stringify(questions));
-  console.log(questionList);
   showQuestion(questionList[currentQuestion]);
 }
 
@@ -72,8 +81,11 @@ function checkOption() {
 }
 
 function scoreDisplay() {
+  checkHighScore();
+  htableDisplay();
+  document.getElementById("hTable").style.display = "block";
   result = document.getElementById("scoreDisplay");
-  result.innerHTML = name + " Scored " + score + " out of 5";
+  result.innerHTML = playerName + " Scored " + score + " out of 5";
   result.classList.add("fadeIn");
   result.style.display = "block";
   restartBtn.style.display = "block";
@@ -97,6 +109,38 @@ function quizDisplay(str1, str2) {
   document.getElementById("option-btns").style.display = str2;
   document.getElementById("control-btns").style.display = str1;
 }
+function checkHighScore() {
+  let check = score,
+    name = playerName;
+  for (let s of scores) {
+    if (
+      score > Number(localStorage.getItem(s)) ||
+      Number(localStorage.getItem(s)) == 0.0
+    ) {
+      highScore = check;
+      nameHighScore = name;
+      check = Number(localStorage.getItem(s));
+      name = localStorage.getItem("name" + s);
+      localStorage.setItem(s, highScore.toFixed(3));
+      localStorage.setItem("name" + s, nameHighScore);
+    }
+  }
+}
+function htableDisplay() {
+  let scoreDiv = document.getElementById("scores"),
+    scoreStr = scoreDiv.getElementsByTagName("p"),
+    i = 0;
+  for (let e of scores) {
+    scoreStr[i].innerHTML =
+      (i + 1).toString() +
+      " . " +
+      localStorage.getItem("name" + e) +
+      " - " +
+      localStorage.getItem(e);
+    i++;
+  }
+}
+
 let questionList,
   questions = [
     {
@@ -210,7 +254,6 @@ let restartBtn = document.getElementById("restart-btn"),
   strtBtn = document.getElementById("strt-btn");
 nextBtn.addEventListener("click", () => {
   if (currentQuestion + 1 != questionList.length) {
-    console.log(currentQuestion);
     currentQuestion++;
     showQuestion(questionList[currentQuestion]);
   }
@@ -230,7 +273,7 @@ prevBtn.addEventListener("click", () => {
 
 strtBtn.addEventListener("click", () => {
   strtBtn.style.display = "none";
-  name = document.getElementById("name").value;
+  playerName = document.getElementById("name").value;
   document.getElementById("name").style.display = "none";
   startQuiz();
 });
@@ -239,7 +282,7 @@ restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
   document.getElementById("control-btns").style.display = "block";
   document.getElementById("scoreDisplay").style.display = "none";
+  document.getElementById("hTable").style.display = "none";
   clearOptions();
   startQuiz();
 });
-quizDisplay("none", "none");
