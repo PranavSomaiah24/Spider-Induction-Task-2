@@ -1,4 +1,10 @@
-let currentQuestion, noAnswered, playerScore, playerName, elapsedTime, interval;
+let currentQuestion,
+  noAnswered,
+  playerScore,
+  playerName,
+  correctQ,
+  elapsedTime,
+  interval;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
 let scores = ["1", "2", "3"];
@@ -37,23 +43,30 @@ function showQuestion(questionData) {
   question.style.display = "block";
   question.innerHTML = "Q. " + questionData.question;
   let i = 1;
+
   questionData.options.forEach((element) => {
     let btn = document.createElement("button");
     btn.innerHTML = element.string;
     btn.classList.add("option-btn");
     btn.dataset.no = i;
+    if (questionData.options[i - 1].correct) {
+      correctQ = i.toFixed();
+      btn.id = correctQ;
+    }
     if (!questionData.isAnswered) {
       btn.addEventListener("click", checkOption);
+    } else if (
+      (questionData.options[i - 1].isSelected &&
+        questionData.options[i - 1].correct) ||
+      questionData.options[i - 1].correct
+    ) {
+      btn.style.backgroundColor = "green";
+      btn.style.color = "white";
+    } else if (questionData.options[i - 1].isSelected) {
+      btn.style.backgroundColor = "red";
+      btn.style.color = "white";
     }
-    if (questionData.options[i - 1].isSelected) {
-      if (questionData.options[i - 1].correct) {
-        btn.style.backgroundColor = "green";
-        btn.style.color = "white";
-      } else {
-        btn.style.backgroundColor = "red";
-        btn.style.color = "white";
-      }
-    }
+
     i++;
     document.getElementById("option-btns").appendChild(btn);
   });
@@ -76,12 +89,18 @@ function checkOption() {
       overlayDisplay("red", "WRONG");
       this.style.backgroundColor = "red";
       this.style.color = "white";
+      document.getElementById(correctQ).style.backgroundColor = "green";
+      document.getElementById(correctQ).style.color = "white";
     }
   }
 }
 
 function scoreDisplay() {
-  score = playerScore * 10 - Math.floor((20 - elapsedTime) / 10) * 2;
+  if (elapsedTime > 9) {
+    score = playerScore * 10;
+  } else {
+    score = playerScore * 10 - Math.floor(10 - elapsedTime) * 2.5;
+  }
   checkHighScore();
   htableDisplay();
   document.getElementById("hTable").style.display = "block";
@@ -151,6 +170,10 @@ function startTimer(duration) {
     document.getElementById("timer").innerHTML = seconds;
     if (--timer < 0) {
       timer = 0;
+      clearInterval(interval);
+      clearOptions();
+      document.getElementById("control-btns").style.display = "none";
+      scoreDisplay();
     }
   }, 1000);
 }
@@ -289,6 +312,7 @@ prevBtn.addEventListener("click", () => {
 
 strtBtn.addEventListener("click", () => {
   strtBtn.style.display = "none";
+  document.getElementById("control-btns").style.display = "block";
   playerName = document.getElementById("name").value;
   document.getElementById("name").style.display = "none";
   startTimer(20);
@@ -307,7 +331,8 @@ function navBarInitialise() {
 
 restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
-  document.getElementById("control-btns").style.display = "block";
+  document.getElementById("timer").style.display = "none";
+  document.getElementById("control-btns").style.display = "none";
   document.getElementById("scoreDisplay").style.display = "none";
   document.getElementById("hTable").style.display = "none";
   clearOptions();
