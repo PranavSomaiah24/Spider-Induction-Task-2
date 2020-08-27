@@ -1,4 +1,4 @@
-let currentQuestion, noAnswered, playerScore, playerName, elapsedTime;
+let currentQuestion, noAnswered, playerScore, playerName, elapsedTime, interval;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
 let scores = ["1", "2", "3"];
@@ -145,7 +145,7 @@ function startTimer(duration) {
   timer = duration;
   let seconds;
   document.getElementById("timer").style.display = "block";
-  setInterval(function () {
+  interval = setInterval(function () {
     seconds = parseInt(timer % 60, 10);
     elapsedTime = seconds;
     document.getElementById("timer").innerHTML = seconds;
@@ -265,6 +265,8 @@ let restartBtn = document.getElementById("restart-btn"),
   nextBtn = document.getElementById("next-btn"),
   prevBtn = document.getElementById("prev-btn"),
   strtBtn = document.getElementById("strt-btn");
+let navBtns = document.querySelectorAll(".nav-btn");
+
 nextBtn.addEventListener("click", () => {
   if (currentQuestion + 1 != questionList.length) {
     currentQuestion++;
@@ -291,7 +293,17 @@ strtBtn.addEventListener("click", () => {
   document.getElementById("name").style.display = "none";
   startTimer(20);
   startQuiz();
+  navBarInitialise();
 });
+function navBarInitialise() {
+  document.getElementById("navbar").style.display = "flex";
+  navBtns.forEach(function (currentBtn) {
+    currentBtn.addEventListener("click", function () {
+      currentQuestion = Number(this.innerHTML) - 1;
+      showQuestion(questionList[currentQuestion]);
+    });
+  });
+}
 
 restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
@@ -299,6 +311,6 @@ restartBtn.addEventListener("click", () => {
   document.getElementById("scoreDisplay").style.display = "none";
   document.getElementById("hTable").style.display = "none";
   clearOptions();
-  startTimer(20);
-  startQuiz();
+  strtBtn.style.display = "block";
+  document.getElementById("name").style.display = "block";
 });
