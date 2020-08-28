@@ -58,7 +58,7 @@ h1 {
   font-size: 2rem;
 }
 .quiz-space {
-  background: blanchedalmond;
+  background: white;
   width: 70%;
   height: 50%;
   max-height: 50%;
@@ -69,6 +69,7 @@ h1 {
   justify-content: center;
   align-items: center;
   border-radius: 0.5em;
+  box-shadow: 10px 10px 100px 0px rgba(0, 0, 0, 0.75);
 }
 #scoreDisplay {
   display: none;
@@ -96,9 +97,11 @@ h1 {
   padding: 0.5em;
   cursor: pointer;
 }
-.option-btn:hover {
+.option-btn:hover,
+.control-btn:hover,
+#restart-btn:hover {
   background: rgba(201, 211, 199, 0.5);
-  box-shadow: 0 0 50px rgba(23, 255, 34, 0.7);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
 }
 .control-btns {
   display: none;
@@ -106,9 +109,12 @@ h1 {
   margin: auto 0 1em 0;
 }
 .control-btn {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
   padding: 0 0.5em;
   margin: 0 0.7em;
+  border-radius: 0.5em;
+  outline: none;
 }
 #timer {
   display: none;
@@ -120,8 +126,10 @@ h1 {
 #restart-btn {
   display: none;
   font-size: 1.5rem;
-  padding: 0.5em;
+  padding: 0.5em 1em;
   margin: 0.5em 0 0 0;
+  border-radius: 0.5em;
+  outline: none;
 }
 #overlay {
   position: absolute;
@@ -139,11 +147,18 @@ h1 {
   padding: 1em;
   font-size: 1.5rem;
   text-align: center;
+  border: 3px solid black;
 }
 #strt-btn {
   font-size: 1.5rem;
   padding: 1em;
   border-radius: 0.5em;
+  outline: none;
+  box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.75);
+}
+#strt-btn:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
 }
 body::-webkit-scrollbar {
   width: 0.8em;

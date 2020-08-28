@@ -23,6 +23,7 @@ function startQuiz() {
   noAnswered = 0;
   playerScore = 0;
   questionList = JSON.parse(JSON.stringify(questions));
+  shuffleArray(questionList);
   showQuestion(questionList[currentQuestion]);
 }
 
@@ -96,10 +97,14 @@ function checkOption() {
 }
 
 function scoreDisplay() {
-  if (elapsedTime > 9) {
+  if (playerScore == 0) {
+    score = 0;
+  } else if (elapsedTime > 9) {
     score = playerScore * 10;
-  } else {
-    score = playerScore * 10 - Math.floor(10 - elapsedTime) * 2.5;
+  } else if(elapsedTime>0){
+    score = playerScore * ((elapsedTime));
+  }else{
+    score=playerScore
   }
   checkHighScore();
   htableDisplay();
@@ -176,6 +181,14 @@ function startTimer(duration) {
       scoreDisplay();
     }
   }, 1000);
+}
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
 }
 let questionList,
   questions = [
