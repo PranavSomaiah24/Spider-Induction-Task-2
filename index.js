@@ -73,7 +73,7 @@ function checkOption() {
 
 function scoreDisplay() {
   result = document.getElementById("scoreDisplay");
-  result.innerHTML = "Your Scored " + score + " out of 5";
+  result.innerHTML = "You Scored " + score + " out of 5";
   result.classList.add("fadeIn");
   result.style.display = "block";
   restartBtn.style.display = "block";
@@ -216,6 +216,7 @@ nextBtn.addEventListener("click", () => {
   }
   if (noAnswered == questionList.length) {
     clearOptions();
+    document.getElementById("control-btns").style.display = "none";
     scoreDisplay();
   }
 });
@@ -234,6 +235,7 @@ strtBtn.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
+  document.getElementById("control-btns").style.display = "block";
   document.getElementById("scoreDisplay").style.display = "none";
   clearOptions();
   startQuiz();
