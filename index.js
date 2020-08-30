@@ -178,6 +178,10 @@ function startTimer(duration) {
       clearInterval(interval);
       clearOptions();
       document.getElementById("control-btns").style.display = "none";
+      imageUrl =
+        "https://image.freepik.com/free-vector/coronavirus-covid-19-background-with-3d-virus-cell-microscopic-view_85212-686.jpg";
+      document.getElementById("quiz-space").style.backgroundImage =
+        "url(" + imageUrl + ")";
       scoreDisplay();
     }
   }, 1000);
@@ -342,7 +346,7 @@ let questionList,
     },
     {
       question:
-        "About what percentage of infected people recover without needing hospital treatment according to the world Health Organisation website?",
+        "About what percentage of infected people recover without needing hospital treatment according to the  WHO?",
       isAnswered: false,
       options: [
         {
@@ -410,6 +414,10 @@ nextBtn.addEventListener("click", () => {
     clearInterval(interval);
     clearOptions();
     document.getElementById("control-btns").style.display = "none";
+    imageUrl =
+      "https://image.freepik.com/free-vector/coronavirus-covid-19-background-with-3d-virus-cell-microscopic-view_85212-686.jpg";
+    document.getElementById("quiz-space").style.backgroundImage =
+      "url(" + imageUrl + ")";
     scoreDisplay();
   }
 });
@@ -423,6 +431,8 @@ prevBtn.addEventListener("click", () => {
 
 strtBtn.addEventListener("click", () => {
   strtBtn.style.display = "none";
+  document.getElementById("quiz-space").style.backgroundImage = "none";
+  document.getElementById("quiz-space").style.backgroundColor = "white";
   document.getElementById("control-btns").style.display = "block";
   playerName = document.getElementById("name").value;
   document.getElementById("name").style.display = "none";
@@ -447,6 +457,9 @@ restartBtn.addEventListener("click", () => {
   document.getElementById("scoreDisplay").style.display = "none";
   document.getElementById("hTable").style.display = "none";
   clearOptions();
+  imageUrl = "https://www.eac.int/images/COVID-19/coronavirus-banner.jpg";
+  document.getElementById("quiz-space").style.backgroundImage =
+    "url(" + imageUrl + ")";
   strtBtn.style.display = "block";
   document.getElementById("name").style.display = "block";
 });
