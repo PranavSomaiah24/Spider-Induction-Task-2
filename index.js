@@ -101,10 +101,10 @@ function scoreDisplay() {
     score = 0;
   } else if (elapsedTime > 9) {
     score = playerScore * 10;
-  } else if(elapsedTime>0){
-    score = playerScore * ((elapsedTime));
-  }else{
-    score=playerScore
+  } else if (elapsedTime > 0) {
+    score = playerScore * elapsedTime;
+  } else {
+    score = playerScore;
   }
   checkHighScore();
   htableDisplay();
@@ -184,10 +184,10 @@ function startTimer(duration) {
 }
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
 }
 let questionList,
@@ -293,6 +293,104 @@ let questionList,
         {
           string: "Wearing a face mask",
           correct: false,
+        },
+      ],
+    },
+    {
+      question: "The novel coronavirus is the same as COVID-19.",
+      isAnswered: false,
+      options: [
+        {
+          string: "True",
+          correct: false,
+        },
+        {
+          string: "False",
+          correct: true,
+        },
+      ],
+    },
+    {
+      question:
+        " A person who has no symptoms of COVID-19 is not a risk to others?",
+      isAnswered: false,
+      options: [
+        {
+          string: "True",
+          correct: false,
+        },
+        {
+          string: "False",
+          correct: true,
+        },
+      ],
+    },
+    {
+      question:
+        "  COVID-19 has currently been detected on all seven continents.",
+      isAnswered: false,
+      options: [
+        {
+          string: "True",
+          correct: false,
+        },
+        {
+          string: "False",
+          correct: true,
+        },
+      ],
+    },
+    {
+      question:
+        "About what percentage of infected people recover without needing hospital treatment according to the world Health Organisation website?",
+      isAnswered: false,
+      options: [
+        {
+          string: "60%",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "70%",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "80%",
+          correct: true,
+          isSelected: false,
+        },
+        {
+          string: "90%",
+          correct: false,
+          isSelected: false,
+        },
+      ],
+    },
+    {
+      question:
+        "WHich of these is NOT listed by the WHO as a symptom of coronavirus?",
+      isAnswered: false,
+      options: [
+        {
+          string: "Fever",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "Blurred vision",
+          correct: true,
+          isSelected: false,
+        },
+        {
+          string: "Dry cough",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "Nasal congestion",
+          correct: false,
+          isSelected: false,
         },
       ],
     },
