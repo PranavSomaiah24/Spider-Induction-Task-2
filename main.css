@@ -61,6 +61,7 @@ h1 {
   /* background: white; */
   background: url("https://www.eac.int/images/COVID-19/coronavirus-banner.jpg");
   background-size: cover;
+
   width: 70%;
   height: 50%;
   max-height: 50%;
@@ -80,7 +81,9 @@ h1 {
 }
 #hTable {
   font-size: 1.5rem;
+  font-weight: bolder;
   color: white;
+  text-align: center;
 }
 #question {
   display: none;

@@ -5,7 +5,8 @@ let currentQuestion,
   correctQ,
   elapsedTime,
   interval,
-  isStarted;
+  isStarted,
+  date;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
 let scores = ["1", "2", "3"];
@@ -16,6 +17,9 @@ for (let e of scores) {
   }
   if (localStorage.getItem("name" + e) == null) {
     localStorage.setItem("name" + e, "Bob");
+  }
+  if (localStorage.getItem("date" + e) == null) {
+    localStorage.setItem("date" + e, "00/00/00");
   }
 }
 
@@ -78,7 +82,6 @@ function showQuestion(questionData) {
 function checkOption() {
   optionNo = this.dataset.no;
   qNo = currentQuestion + 1;
-  console.log("q" + qNo.toFixed(0));
   if (!questionList[currentQuestion].isAnswered) {
     noAnswered++;
     questionList[currentQuestion].isAnswered = true;
@@ -104,15 +107,6 @@ function checkOption() {
 }
 
 function scoreDisplay() {
-  // if (playerScore == 0) {
-  //   score = 0;
-  // } else if (elapsedTime > 9) {
-  //   score = playerScore * 10;
-  // } else if (elapsedTime > 0) {
-  //   score = playerScore * elapsedTime;
-  // } else {
-  //   score = playerScore;
-  // }
   if (elapsedTime > 15) {
     score = playerScore * 10;
   } else if (elapsedTime > 5) {
@@ -120,6 +114,8 @@ function scoreDisplay() {
   } else {
     score = playerScore * 10 * 0.5;
   }
+  date = new Date().toLocaleString();
+  console.log(date);
   checkHighScore();
   htableDisplay();
   document.getElementById("hTable").style.display = "block";
@@ -150,6 +146,7 @@ function quizDisplay(str1, str2) {
 }
 function checkHighScore() {
   let check = score,
+    tempDate = date,
     name = playerName;
   for (let s of scores) {
     if (
@@ -158,10 +155,13 @@ function checkHighScore() {
     ) {
       highScore = check;
       nameHighScore = name;
+      dateHighScore = tempDate;
       check = Number(localStorage.getItem(s));
       name = localStorage.getItem("name" + s);
+      tempDate = localStorage.getItem("date" + s);
       localStorage.setItem(s, highScore.toFixed(3));
       localStorage.setItem("name" + s, nameHighScore);
+      localStorage.setItem("date" + s, dateHighScore);
     }
   }
 }
@@ -175,7 +175,10 @@ function htableDisplay() {
       " . " +
       localStorage.getItem("name" + e) +
       " - " +
-      localStorage.getItem(e);
+      localStorage.getItem(e) +
+      " (" +
+      localStorage.getItem("date" + e) +
+      " )";
     i++;
   }
 }
