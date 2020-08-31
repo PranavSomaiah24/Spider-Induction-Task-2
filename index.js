@@ -72,7 +72,7 @@ function checkOption() {
 
 function scoreDisplay() {
   result = document.getElementById("scoreDisplay");
-  result.innerHTML = "You Scored " + score + " out of 5";
+  result.innerHTML = "You Scored " + score + " out of 10";
   result.classList.add("fadeIn");
   result.style.display = "block";
   restartBtn.style.display = "block";
@@ -313,6 +313,10 @@ nextBtn.addEventListener("click", () => {
   }
   if (noAnswered == questionList.length) {
     clearOptions();
+    imageUrl =
+      "https://image.freepik.com/free-vector/coronavirus-covid-19-background-with-3d-virus-cell-microscopic-view_85212-686.jpg";
+    document.getElementById("quiz-space").style.backgroundImage =
+      "url(" + imageUrl + ")";
     document.getElementById("control-btns").style.display = "none";
     scoreDisplay();
   }
@@ -327,11 +331,15 @@ prevBtn.addEventListener("click", () => {
 
 strtBtn.addEventListener("click", () => {
   strtBtn.style.display = "none";
+  document.getElementById("quiz-space").style.backgroundImage = "none";
+  document.getElementById("quiz-space").style.backgroundColor = "white";
   startQuiz();
 });
 
 restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
+  document.getElementById("quiz-space").style.backgroundImage = "none";
+  document.getElementById("quiz-space").style.backgroundColor = "white";
   document.getElementById("control-btns").style.display = "block";
   document.getElementById("scoreDisplay").style.display = "none";
   clearOptions();
