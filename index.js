@@ -7,7 +7,6 @@ function startQuiz() {
   noAnswered = 0;
   score = 0;
   questionList = JSON.parse(JSON.stringify(questions));
-  console.log(questionList);
   showQuestion(questionList[currentQuestion]);
 }
 
@@ -200,6 +199,104 @@ let questionList,
         {
           string: "Wearing a face mask",
           correct: false,
+        },
+      ],
+    },
+    {
+      question: "The novel coronavirus is the same as COVID-19.",
+      isAnswered: false,
+      options: [
+        {
+          string: "True",
+          correct: false,
+        },
+        {
+          string: "False",
+          correct: true,
+        },
+      ],
+    },
+    {
+      question:
+        " A person who has no symptoms of COVID-19 is not a risk to others?",
+      isAnswered: false,
+      options: [
+        {
+          string: "True",
+          correct: false,
+        },
+        {
+          string: "False",
+          correct: true,
+        },
+      ],
+    },
+    {
+      question:
+        "  COVID-19 has currently been detected on all seven continents.",
+      isAnswered: false,
+      options: [
+        {
+          string: "True",
+          correct: false,
+        },
+        {
+          string: "False",
+          correct: true,
+        },
+      ],
+    },
+    {
+      question:
+        "About what percentage of infected people recover without needing hospital treatment according to the  WHO?",
+      isAnswered: false,
+      options: [
+        {
+          string: "60%",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "70%",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "80%",
+          correct: true,
+          isSelected: false,
+        },
+        {
+          string: "90%",
+          correct: false,
+          isSelected: false,
+        },
+      ],
+    },
+    {
+      question:
+        "WHich of these is NOT listed by the WHO as a symptom of coronavirus?",
+      isAnswered: false,
+      options: [
+        {
+          string: "Fever",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "Blurred vision",
+          correct: true,
+          isSelected: false,
+        },
+        {
+          string: "Dry cough",
+          correct: false,
+          isSelected: false,
+        },
+        {
+          string: "Nasal congestion",
+          correct: false,
+          isSelected: false,
         },
       ],
     },
