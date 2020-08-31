@@ -4,7 +4,8 @@ let currentQuestion,
   playerName,
   correctQ,
   elapsedTime,
-  interval;
+  interval,
+  isStarted;
 let correctSound = new Audio("Ding-sound-effect.mp3");
 let question = document.getElementById("question");
 let scores = ["1", "2", "3"];
@@ -19,6 +20,7 @@ for (let e of scores) {
 }
 
 function startQuiz() {
+  isStarted = true;
   currentQuestion = 0;
   noAnswered = 0;
   playerScore = 0;
@@ -75,7 +77,8 @@ function showQuestion(questionData) {
 
 function checkOption() {
   optionNo = this.dataset.no;
-
+  qNo = currentQuestion + 1;
+  console.log("q" + qNo.toFixed(0));
   if (!questionList[currentQuestion].isAnswered) {
     noAnswered++;
     questionList[currentQuestion].isAnswered = true;
@@ -83,12 +86,16 @@ function checkOption() {
     if (questionList[currentQuestion].options[optionNo - 1].correct) {
       correctSound.play();
       overlayDisplay("green", "CORRECT");
+      document.getElementById("q" + qNo.toFixed(0)).style.backgroundColor =
+        "green";
       this.style.backgroundColor = "green";
       this.style.color = "white";
       playerScore++;
     } else {
       overlayDisplay("red", "WRONG");
       this.style.backgroundColor = "red";
+      document.getElementById("q" + qNo.toFixed(0)).style.backgroundColor =
+        "red";
       this.style.color = "white";
       document.getElementById(correctQ).style.backgroundColor = "green";
       document.getElementById(correctQ).style.color = "white";
@@ -97,20 +104,27 @@ function checkOption() {
 }
 
 function scoreDisplay() {
-  if (playerScore == 0) {
-    score = 0;
-  } else if (elapsedTime > 9) {
+  // if (playerScore == 0) {
+  //   score = 0;
+  // } else if (elapsedTime > 9) {
+  //   score = playerScore * 10;
+  // } else if (elapsedTime > 0) {
+  //   score = playerScore * elapsedTime;
+  // } else {
+  //   score = playerScore;
+  // }
+  if (elapsedTime > 15) {
     score = playerScore * 10;
-  } else if (elapsedTime > 0) {
-    score = playerScore * elapsedTime;
+  } else if (elapsedTime > 5) {
+    score = playerScore * 10 * 0.25;
   } else {
-    score = playerScore;
+    score = playerScore * 10 * 0.5;
   }
   checkHighScore();
   htableDisplay();
   document.getElementById("hTable").style.display = "block";
   result = document.getElementById("scoreDisplay");
-  result.innerHTML = playerName + " Scored " + score + " out of 50";
+  result.innerHTML = playerName + " Scored " + score + " out of 100";
   result.classList.add("fadeIn");
   result.style.display = "block";
   restartBtn.style.display = "block";
@@ -411,6 +425,7 @@ nextBtn.addEventListener("click", () => {
     showQuestion(questionList[currentQuestion]);
   }
   if (noAnswered == questionList.length) {
+    isStarted = false;
     clearInterval(interval);
     clearOptions();
     document.getElementById("control-btns").style.display = "none";
@@ -436,22 +451,26 @@ strtBtn.addEventListener("click", () => {
   document.getElementById("control-btns").style.display = "block";
   playerName = document.getElementById("name").value;
   document.getElementById("name").style.display = "none";
-  startTimer(20);
+  startTimer(59);
   startQuiz();
   navBarInitialise();
 });
 function navBarInitialise() {
   document.getElementById("navbar").style.display = "flex";
   navBtns.forEach(function (currentBtn) {
+    currentBtn.style.backgroundColor = "black";
     currentBtn.addEventListener("click", function () {
-      currentQuestion = Number(this.innerHTML) - 1;
-      showQuestion(questionList[currentQuestion]);
+      if (isStarted) {
+        currentQuestion = Number(this.innerHTML) - 1;
+        showQuestion(questionList[currentQuestion]);
+      }
     });
   });
 }
 
 restartBtn.addEventListener("click", () => {
   restartBtn.style.display = "none";
+  document.getElementById("navbar").style.display = "none";
   document.getElementById("timer").style.display = "none";
   document.getElementById("control-btns").style.display = "none";
   document.getElementById("scoreDisplay").style.display = "none";
